@@ -2,5 +2,25 @@
 // © mtibb
 
 //@version=5
-indicator("Burke Indicator")
-plot(close)
+indicator("My script", overlay=true)
+//Global Inputs
+chart_timeframe = input.string("UTC-4", title="TimeFrame")
+//Previous Day Close
+prev_daily_close = request.security(syminfo.tickerid, "D", close[0])
+plot(prev_daily_close, title="PDC", trackprice=false, style=plot.style_circles, color=color.green) 
+
+//Previous Day High
+prev_daily_high = request.security(syminfo.tickerid, "D", high[0])
+plot(prev_daily_high, title="PDH", trackprice=false, style=plot.style_steplinebr) 
+
+//Previous Day Low
+prev_daily_low = request.security(syminfo.tickerid, "D", low[0])
+plot(prev_daily_low, title="PDL", trackprice=false, style=plot.style_steplinebr) 
+
+//Previous Week Close
+prev_weekly_close = request.security(syminfo.tickerid, "W", close[0])
+plot(prev_weekly_close, title="PWC", trackprice=false, style=plot.style_circles)
+
+//Previous Month Close
+prev_monthly_close = request.security(syminfo.tickerid, "M", close[0])
+plot(prev_monthly_close, title="PMC", trackprice=false, style=plot.style_circles)
